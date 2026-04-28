@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Analyzer</title>
+
+```
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        margin: 0;
+        color: white;
+    }
+
+    .title {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 32px;
+        font-weight: 700;
+    }
+
+    .container {
+        width: 450px;
+        margin: 40px auto;
+        padding: 25px;
+        border-radius: 15px;
+        background: rgba(255,255,255,0.15);
+    }
+
+    input, textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 8px;
+        border: none;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        background: #0072ff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    .result {
+        margin-top: 15px;
+        padding: 10px;
+        background: rgba(255,255,255,0.2);
+        white-space: pre-wrap;
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+<div class="title">🚀 AI Resume Analyzer</div>
+
+<div class="container">
+
+```
+<form id="uploadForm">
+
+    <label>Resume</label>
+    <input type="file" id="file" required>
+
+    <label>Job Description</label>
+    <textarea id="jd" placeholder="Enter job description" required></textarea>
+
+    <button type="submit">Analyze Resume</button>
+
+</form>
+
+<div class="result" id="result">Result will appear here...</div>
+```
+
+</div>
+
+<script>
+document.getElementById("uploadForm").onsubmit = async function(e) {
+    e.preventDefault();
+
+    let formData = new FormData();
+    formData.append("file", document.getElementById("file").files[0]);
+    formData.append("jobDescription", document.getElementById("jd").value);
+
+    let res = await fetch("/upload", { method: "POST", body: formData });
+    let text = await res.text();
+
+    document.getElementById("result").innerText = text;
+};
+</script>
+
+</body>
+</html>
